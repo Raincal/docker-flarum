@@ -1,4 +1,4 @@
-# mondedie/docker-flarum
+# raincal/docker-flarum-china
 
 ![logo](https://i.imgur.com/Bjrtbsc.png "logo")
 
@@ -49,10 +49,10 @@ Flarum is the next-generation forum software that makes online discussion fun. I
 
 ```
 # Pull from hub.docker.com :
-docker pull mondedie/docker-flarum:0.1.0-beta.7-stable
+docker pull raincal/docker-flarum-china:0.1.0-beta.7-stable
 
 # or build it manually :
-docker build -t mondedie/docker-flarum https://github.com/mondediefr/flarum.git#master
+docker build -t raincal/docker-flarum-china https://github.com/Raincal/docker-flarum-china.git#master
 ```
 
 #### 2 - Docker-compose.yml
@@ -61,7 +61,7 @@ Adapt to your needs :
 
 ```
 flarum:
-  image: mondedie/docker-flarum:0.1.0-beta.7-stable
+  image: raincal/docker-flarum-china:0.1.0-beta.7-stable
   container_name: flarum
   links:
     - mariadb:mariadb
@@ -101,7 +101,7 @@ docker-compose up -d
 :warning: Disable 3rd party extensions prior to upgrading.
 
 ```
-docker pull mondedie/docker-flarum:0.1.0-beta.7-stable && docker-compose up -d
+docker pull raincal/docker-flarum-china:0.1.0-beta.7-stable && docker-compose up -d
 ```
 
 Navigate to `yourforum.com/admin`, enter your database password and update.
