@@ -20,7 +20,7 @@ RUN apk add -U curl \
  && COMPOSER_CACHE_DIR="/tmp" su-exec $UID:$GID composer create-project flarum/flarum /flarum/app $VERSION --stability=beta \
  && cd /flarum/app \
  && rm -r composer.json \
- && wget https://gist.githubusercontent.com/Raincal/a3e7bc300cd23ce1178b1a869810f877/raw/0282c293f56b7b20674d6f2146f2a071a9cb2052/composer.json \
+ && wget https://gist.githubusercontent.com/Raincal/a3e7bc300cd23ce1178b1a869810f877/raw/2364120b4b90ca118e564e308dba0ce8c929d510/composer.json \
  && composer update \
  && composer dump-autoload --optimize \
  && composer clear-cache \
