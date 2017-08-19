@@ -10,6 +10,8 @@ ENV GID=991 UID=991 UPLOAD_MAX_SIZE=50M MEMORY_LIMIT=128M
 RUN apk update && apk upgrade && \
     apk add --no-cache git
 
+COPY FlarumChina-0.1.0-beta.7b /tmp
+
 RUN apk add -U curl \
  && cd /tmp \
  && curl -s http://getcomposer.org/installer | php \
@@ -17,17 +19,14 @@ RUN apk add -U curl \
  && chmod +x /usr/bin/composer \
  && mkdir -p /flarum/app \
  && chown -R $UID:$GID /flarum \
- && COMPOSER_CACHE_DIR="/tmp" su-exec $UID:$GID composer create-project flarum/flarum /flarum/app $VERSION --stability=beta \
+ && cp -rf /tmp/* /flarum/app \
  && cd /flarum/app \
- && rm -r composer.json \
- && wget https://gist.githubusercontent.com/Raincal/a3e7bc300cd23ce1178b1a869810f877/raw/754ad3b15f60600aebd69b2d9153dee012b84d59/composer.json \
- && composer update \
- && composer dump-autoload --optimize \
+ && composer install \
  && composer clear-cache \
- && rm -rf /flarum/.composer /var/cache/apk/*
+ && rm -rf /flarum/.composer /var/cache/apk/* /tmp
 
 COPY rootfs /
 RUN chmod +x /usr/local/bin/* /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
-VOLUME /flarum/app/assets /flarum/app/extensions
+VOLUME /flarum/app/assets /flarum/app/extensions /flarum/app/config.json
 EXPOSE 8888
 CMD ["run.sh"]
