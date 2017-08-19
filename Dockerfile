@@ -22,6 +22,7 @@ RUN apk add -U curl \
  && cp -rf /tmp/* /flarum/app \
  && cd /flarum/app \
  && composer install \
+ && composer dump-autoload --optimize \
  && composer clear-cache \
  && rm -rf /flarum/.composer /var/cache/apk/* /tmp
 
